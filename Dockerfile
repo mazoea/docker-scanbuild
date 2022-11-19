@@ -16,7 +16,10 @@ ENV CC=/usr/bin/clang-$CLANGVER \
     CMAKE_CXX_COMPILER=/usr/share/clang/scan-build-$CLANGVER/libexec/c++-analyzer \
     CMAKE_C_COMPILER=/usr/share/clang/scan-build-$CLANGVER/libexec/ccc-analyzer
 
-RUN ls -lah /usr/bin/clang* && ln -s $CC /usr/bin/clang || true
+RUN ls -lah /usr/bin/clang* && \
+    (ln -s $CC /usr/bin/clang || true) &&  \
+    (ln -s $CXX /usr/bin/clang++ || true) &&  \
+    (ln -s /usr/bin/scan-build-$CLANGVER /usr/bin/scan-build || true)
 
 ENV EXTCMD=scan-build\ -v\ --use-analyzer=/usr/bin/clang-$CLANGVER
 
