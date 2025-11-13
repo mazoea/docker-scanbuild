@@ -1,15 +1,15 @@
-FROM ubuntu:18.04
+FROM ubuntu:24.04
 
-ENV CLANGVER=10 \
+ENV CLANGVER=18 \
     CHECKERS="-disable-checker deadcode.DeadStores -enable-checker alpha.core.CastSize -enable-checker alpha.core.CastToStruct -enable-checker alpha.core.IdenticalExpr -enable-checker alpha.core.SizeofPtr -enable-checker alpha.security.ArrayBoundV2 -enable-checker alpha.security.MallocOverflow -enable-checker alpha.security.ReturnPtrRange -enable-checker alpha.unix.SimpleStream -enable-checker alpha.unix.cstring.BufferOverlap -enable-checker alpha.unix.cstring.NotNullTerminated -enable-checker alpha.unix.cstring.OutOfBounds -enable-checker alpha.core.FixedAddr -enable-checker unix -enable-checker security.insecureAPI.strcpy"
 
 # 2023/01 - python3-distutils-extra for `asan_symbolize`
 RUN apt-get update && \
-    apt-get install -y libc++-dev libfindbin-libs-perl links wget gpg python3-distutils-extra \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libc++-dev libfindbin-libs-perl links wget gpg \
                         libleptonica-dev libfreetype6-dev \
-                        zlib1g-dev libjpeg-dev libtiff-dev libpng-dev libgif-dev libwebp-dev libjbig-dev liblzma-dev liblz-dev && \
+                        zlib1g-dev libjpeg-dev libtiff-dev libpng-dev libgif-dev libwebp-dev libjbig-dev liblzma-dev && \
     wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null && \
-    echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ bionic main' | tee /etc/apt/sources.list.d/kitware.list >/dev/null && \
+    echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ noble main' | tee /etc/apt/sources.list.d/kitware.list >/dev/null && \
     apt-get update && \
     apt-get install -y clang-$CLANGVER clang-tools-$CLANGVER cmake && \
     rm -rf /var/lib/apt/lists/*
