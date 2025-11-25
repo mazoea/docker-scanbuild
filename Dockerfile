@@ -1,7 +1,23 @@
 FROM ubuntu:24.04
 
-ENV CLANGVER=19 \
-    CHECKERS="-disable-checker deadcode.DeadStores -enable-checker alpha.core.CastSize -enable-checker alpha.core.CastToStruct -enable-checker alpha.core.IdenticalExpr -enable-checker alpha.core.SizeofPtr -enable-checker alpha.security.ArrayBoundV2 -enable-checker alpha.security.MallocOverflow -enable-checker alpha.security.ReturnPtrRange -enable-checker alpha.unix.SimpleStream -enable-checker alpha.unix.cstring.BufferOverlap -enable-checker alpha.unix.cstring.NotNullTerminated -enable-checker alpha.unix.cstring.OutOfBounds -enable-checker alpha.core.FixedAddr -enable-checker unix -enable-checker security.insecureAPI.strcpy"
+ENV CLANGVER=20 \
+    CHECKERS="\
+    -disable-checker deadcode.DeadStores \
+    -enable-checker alpha.core.CastSize \
+    -enable-checker alpha.core.CastToStruct \
+    -enable-checker alpha.security.ArrayBoundV2 \
+    -enable-checker alpha.security.MallocOverflow \
+    -enable-checker alpha.security.ReturnPtrRange \
+    -enable-checker alpha.unix.SimpleStream \
+    -enable-checker alpha.unix.cstring.BufferOverlap \
+    -enable-checker alpha.unix.cstring.NotNullTerminated \
+    -enable-checker alpha.unix.cstring.OutOfBounds \
+    -enable-checker alpha.core.FixedAddr \
+    -enable-checker unix \
+    -enable-checker core \
+    -enable-checker nullability \
+    -enable-checker cplusplus \
+    -enable-checker security"
 
 # 2023/01 - python3-distutils-extra for `asan_symbolize`
 RUN apt-get update && \
