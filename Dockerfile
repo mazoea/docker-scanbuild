@@ -16,8 +16,8 @@ ENV CC=/usr/bin/clang-$CLANGVER \
     CXX=/usr/bin/clang++-$CLANGVER \
     CCC_CC=/usr/bin/clang-$CLANGVER \
     CCC_CXX=/usr/bin/clang++-$CLANGVER \
-    CMAKE_CXX_COMPILER=/usr/lib/llvm-$CLANGVER/bin/c++-analyzer \
-    CMAKE_C_COMPILER=/usr/lib/llvm-$CLANGVER/bin/ccc-analyzer
+    CMAKE_CXX_COMPILER=/usr/share/clang/scan-build-$CLANGVER/libexec/c++-analyzer \
+    CMAKE_C_COMPILER=/usr/share/clang/scan-build-$CLANGVER/libexec/ccc-analyzer
 
 RUN ls -lah /usr/bin/clang* && \
     (ln -s $CC /usr/bin/clang || true) &&  \
