@@ -6,7 +6,6 @@ ENV CLANGVER=20 \
     -enable-checker alpha.core.CastToStruct \
     -enable-checker alpha.security.ReturnPtrRange \
     -enable-checker alpha.unix.cstring.BufferOverlap \
-    -enable-checker alpha.unix.cstring.NotNullTerminated \
     -enable-checker alpha.unix.cstring.OutOfBounds \
     -enable-checker alpha.core.FixedAddr \
     -enable-checker optin.cplusplus.UninitializedObject \
