@@ -17,11 +17,11 @@ ENV CLANGVER=20 \
 
 # 2023/01 - python3-distutils-extra for `asan_symbolize`
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libc++-dev libfindbin-libs-perl links wget gpg \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libc++-dev libfindbin-libs-perl links wget gpg \
                         libleptonica-dev libfreetype6-dev \
                         zlib1g-dev libjpeg-dev libtiff-dev libpng-dev libgif-dev libwebp-dev libjbig-dev liblzma-dev \
                         sudo && \
-    apt-get install -y clang-$CLANGVER clang-tools-$CLANGVER cmake && \
+    apt-get install -y --no-install-recommends clang-$CLANGVER clang-tools-$CLANGVER cmake && \
     rm -rf /var/lib/apt/lists/*
 
 ENV CC=/usr/bin/clang-$CLANGVER \
